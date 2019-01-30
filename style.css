@@ -1,0 +1,51 @@
+
+    .margintop{
+        margin-top: 8vh;
+    }
+
+    .paddingmomo{
+        padding-top: 5vh;
+        padding-bottom: 2em;
+    }
+    .paddingmo{
+        padding: 1em;
+    }
+
+    html body{
+        background-color: orange;
+    }
+
+    .paddingno{
+        padding: 0;
+    }
+
+    .reSizeFont{
+        font-size: 0.8rem;
+    }
+
+/* MEDIA QUERIES */
+
+@media (min-width: 370px) and (max-width: 540px) {
+    .col-sm-12 {
+        margin-left: 9%;
+        margin-top: 5%;
+    }
+    
+    }
+    
+    @media  (min-width:325px) and (max-width: 370px) {
+        .col-sm-12 {
+            margin-left: 6%;
+            margin-top: 5%;
+        }
+        
+    }
+    
+    @media   (max-width: 320px) {
+        .col-sm-12 {
+            margin-top: 3%;
+        }
+        .margintop{
+            padding-top: 2vh;
+        }
+    }
