@@ -1,0 +1,50 @@
+@media (min-width: 370px) and (max-width: 540px) {
+.col-sm-12 {
+    margin-left: 9%;
+    margin-top: 5%;
+}
+
+}
+
+@media  (min-width:325px) and (max-width: 370px) {
+    .col-sm-12 {
+        margin-left: 6%;
+        margin-top: 5%;
+    }
+    
+}
+
+@media   (max-width: 320px) {
+    .col-sm-12 {
+        margin-top: 3%;
+    }
+
+    .zcontent {
+        font-size: 12px;
+    }
+    
+}
+
+
+
+
+/*la partie profil de chien*/
+
+
+.chienProfil {
+
+    width: 100px;
+    border-radius: 25rem;
+}
+
+
+
+
+
+/**/
+
+.comment_box {
+    margin-top: 21px;
+    border-top: 1px solid rgb(224, 224, 224);
+}
+
