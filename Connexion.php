@@ -8,9 +8,9 @@ class Connexion {
 			$db_info = array(
 				"db_host" => "localhost",
 				"db_port" => "3306",
-				"db_user" => "admininstadog",
+				"db_user" => "adminInstaDog",
 				"db_pass" => "digital2018",
-				"db_name" => "isntadog");
+				"db_name" => "InstaDog");
 			try {
 				self::$instance = new PDO("mysql:host=".$db_info['db_host'].';port='.$db_info['db_port'].';dbname='.$db_info['db_name'], $db_info['db_user'], $db_info['db_pass']);
 				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
@@ -24,6 +24,9 @@ class Connexion {
 }
 
 
+
+
+/* 
 function insert(){
     
     $con =  Connexion::getInstance();
@@ -39,12 +42,14 @@ function insert(){
 
 
 
+$obj1 = Connexion::getInstance();
+
 $obj2 = Connexion::getInstance();
 
 
 insert();
 
 print_r($obj2->lastInsertId());
-//print_r(($obj1 === $obj2)? "two obj are same":"no they are not same");
-
+print_r(($obj1 === $obj2)? "two obj are same":"no they are not same");
+ */
 ?>

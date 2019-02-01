@@ -48,21 +48,21 @@
         </div>
         <div class="row pl-3 pr-3 profil-edit-parent">
             <div class="col-10">
-                <p><strong>Vincent : Berset</strong></p>
+                <p>Vincent : Berset</p>
             </div>
-            <div class="col-2"><i class="fas fa-edit edit_profil"></i></div>
+            <div class="col-2"><i class="fas fa-edit edit_profil" onclick="update_profil(this)"></i></div>
         </div>
         <div class="row pl-3 pr-3 profil-edit-parent">
             <div class="col-10">
-                <p><strong>Vincent@realise.ch</strong></p>
+                <p>Vincent@realise.ch</p>
             </div>
-            <div class="col-2"><i class="fas fa-edit edit_profil"></i></div>
+            <div class="col-2"><i class="fas fa-edit edit_profil" onclick="update_profil(this)"></i></div>
         </div>
         <div class="row pl-3 pr-3 profil-edit-parent">
             <div class="col-10">
-                <p><strong>mdp: *********</strong></p>
+                <p>mdp: *********</p>
             </div>
-            <div class="col-2"><i class="fas fa-edit edit_profil"></i></div>
+            <div class="col-2"><i class="fas fa-edit edit_profil" onclick="update_profil(this)"></i></div>
         </div>
         <div class="row pl-3 pr-3">
             <div class="col-10 text-center">
@@ -76,24 +76,24 @@
         <div class="row">
             <div class="col-6">
                 <h6>Chien 1</h6>
-                <img src="images/dog1.jpg" alt="..." class="img-thumbnail">
+                <a href="chien.html"><img src="images/dog1.jpg" alt="..." class="img-thumbnail"></a>
                 <a href="AjouteArticle.html" class="btn btn-sm btn-primary mt-1">+ Article</a>
             </div>
             <div class="col-6">
                 <h6>Chien 1</h6>
-                <img src="images/dog1.jpg" alt="..." class="img-thumbnail">
+                <a href="chien.html"><img src="images/dog1.jpg" alt="..." class="img-thumbnail"></a>
                 <a href="AjouteArticle.html" class="btn btn-sm btn-primary mt-1">+ Article</a>
             </div>
         </div>
         <div class="row mt-3 pb-3">
             <div class="col-6">
                 <h6>Chien 1</h6>
-                <img src="images/dog1.jpg" alt="..." class="img-thumbnail">
+                <a href="chien.html"><img src="images/dog1.jpg" alt="..." class="img-thumbnail"></a>
                 <a href="AjouteArticle.html" class="btn btn-sm btn-primary mt-1">+ Article</a>
             </div>
             <div class="col-6">
                 <h6>Chien 1</h6>
-                <img src="images/dog1.jpg" alt="..." class="img-thumbnail">
+                <a href="chien.html"><img src="images/dog1.jpg" alt="..." class="img-thumbnail"></a>
                 <a href="AjouteArticle.html" class="btn btn-sm btn-primary mt-1">+ Article</a>
             </div>
         </div>
@@ -102,25 +102,29 @@
 
     <script>
         
-     $(".edit_profil").click(function(){
-
-        var h = $(this).parents(".profil-edit-parent").children(".col-10").children("p").children("strong").html();
-        $(this).parents(".profil-edit-parent").children(".col-10").children("p").remove();
-        $(this).parents(".profil-edit-parent").children(".col-10").html("<input type='text' value='"+h+"'>");
+     
+        function update_profil(e){
+        var h = $(e).parents(".profil-edit-parent").children(".col-10").children("p").html();
+        console.log(h);
+        $(e).parents(".profil-edit-parent").children(".col-10").children("p").remove();
+        $(e).parents(".profil-edit-parent").children(".col-10").html("<input type='text' value='"+h+"'>");
         /* $(this).remove();
         $(this).parent(".col-2").append('<i class="fas fa-clipboard-check"></i>'); */
-        $(this).replaceWith('<i class="fas fa-clipboard-check update_profil" style="font-size:17pt;color:red;" onclick="update(this)"></i>');
+        $(e).replaceWith('<i class="fas fa-clipboard-check update_profil" style="font-size:17pt;color:red;" onclick="update(this)"></i>');
 
-         
-     });
+        }
+    
      /* $(".update_profil").click(function(){
          alert("ok");
         $(this).replaceWith('<i class="fas fa-edit edit_profil"></i>');
      }); */
 
      function update(e){
+        var h  = $(e).parents(".profil-edit-parent").children(".col-10").children("input").val();
         $(e).parents(".profil-edit-parent").children(".col-10").children("input").remove();
-        $(e).replaceWith('<i class="fas fa-edit edit_profil"></i>');
+        console.log(h);
+        $(e).parents(".profil-edit-parent").children(".col-10").append("<p>"+h+"</p>");
+        $(e).replaceWith('<i class="fas fa-edit edit_profil"  onclick="update_profil(this)" ></i>');
      } 
     
     </script>
