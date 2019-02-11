@@ -24,32 +24,15 @@ class Connexion {
 }
 
 
-
-
-/* 
-function insert(){
-    
-    $con =  Connexion::getInstance();
-
-    $requete_prepare = $con->prepare(
-        "insert into user(id,pseudo,email,dateDerniereConnexion,motDePass) 
-    values(:id,:pseudo,:email,:dateDerniereConnexion,:motDePass)");
-    $requete_prepare->execute(
-        array('id' => 3, 'pseudo' => "jose", 'email' => "jose@kk.com", 'dateDerniereConnexion' => "2019-1-10-17:30", 'motDePass' => "josedskfsklfjskldj"));
-
-    //return $con->lastInsertId();     
-}
+	
+	
 
 
 
-$obj1 = Connexion::getInstance();
-
-$obj2 = Connexion::getInstance();
 
 
-insert();
 
-print_r($obj2->lastInsertId());
-print_r(($obj1 === $obj2)? "two obj are same":"no they are not same");
- */
+
+
+
 ?>
