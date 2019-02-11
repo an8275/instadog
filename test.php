@@ -1,24 +1,36 @@
 <?php
-include("Connexion.php");
+/* include("Connexion.php");
+$obj = new Connexion();
+$con = $obj->getConnexion(); 
 
- $con = Connexion::getInstance();
+echo "<pre>";
 
+echo "ok";
+echo date("Y-m-d H:i:s");
 
+echo $obj->insertArticle("test.png","the best dog i ever had",date("Y-m-d H:i:s"),3);
 
-function insert(){
-    global $con;
-    $requete_prepare = $con->prepare(
-        "insert into user(id,pseudo,email,dateDerniereConnexion,motDePass) 
-    values(:id,:pseudo,:email,:dateDerniereConnexion,:motDePass)");
-    $requete_prepare->execute(
-        array('id' => 3, 'pseudo' => "jose", 'email' => "jose@kk.com", 'dateDerniereConnexion' => "2019-1-10-17:30", 'motDePass' => "josedskfsklfjskldj"));
+echo "</pre>"; 
 
-    return $con->lastInsertId();     
+    
+    */   
+    
+    
+    
+// The message
+
+$headers  = "Organization: www.realise.ch\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
+$headers .= "X-Priority: 3\r\n";
+$headers .= "X-Mailer: PHP". phpversion() ."\r\n";
+if(mail("zabiullah.ahmadi.241994@gmail.com", "Message", "A simple message.", $headers)){
+    echo "send";
+}else {
+    echo "failed";
 }
-
-
-print_r(insert());
-
-
-
+    
 ?>
+
+
+

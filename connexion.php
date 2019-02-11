@@ -10,17 +10,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
     <title>profil</title>
-
-    <style>
-        .toggle.ios, .toggle-on.ios, .toggle-off.ios { 
-            border-radius: 20px;
-            border:1px solid gray;
-            }
-        .toggle.ios .toggle-handle {
-            border-radius: 20px; 
-        }
-    </style>
   </head>
   <body>
     
@@ -34,16 +25,25 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="Accueil.html">Accueil <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="Accueil.php">Accueil <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="inscription.html">S'inscrire</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="connexion.html">Se connecter</a>
+                <a class="nav-link" href="inscription.php">S'inscrire</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="profil.html">profil</a>
+                <a class="nav-link" href="connexion.php">Se connecter</a>
+              </li>
+              
+              <?php
+                session_start();
+                  if(isset($_SESSION["guest"])){
+                      
+                  }else if(isset($_SESSION["email"])){
+                    echo '<li class="nav-item"><a class="nav-link" href="profil.php">profil</a></li>';
+                  }                  
+                ?>
+              <li class="nav-item">
+                <a class="nav-link" href="conf.php?destroy">sortir</a>
               </li>
               
             </ul>
@@ -52,8 +52,9 @@
 
     <div class="container alert-secondary">
         <div class="row pt-3">
-            <div class="col-12">
-                <h3 class="text-center">S'inscrire</h3>
+            <div class="col-12 error_info">
+                <h3 class="text-center">Se connecter</h3>
+                
             </div>
         </div>
         <div class="row pl-3 pr-3">
@@ -61,19 +62,9 @@
                 
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                </div>
-            </div>
-        </div>
-        <div class="row pl-3 pr-3">
-            <div class="col-12 col-auto">
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-envelope"></i></span>
                     </div>
-                    <input type="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" class="form-control email" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                 </div>
             </div>
         </div>
@@ -83,24 +74,88 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-unlock"></i></span>
                     </div>
-                    <input type="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    <input type="password" class="form-control mdp" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                 </div>
             </div>
         </div>
-        <div class="row row pl-3 pr-3">
-            <div class="col-12">
-                    <p><input type="checkbox" checked data-toggle="toggle" data-style="ios">
-                    remember me ?</p>
+        <div class="row pl-3 pr-3 col-auto">
+            <div class="col-7">
+                <button class="btn btn-success login">se conneter</button>
+            </div>
+            <div class="col-3 ml-3">
+                <a href="inscription.php" class="btn btn-primary ">s'inscrire</a>
             </div>
         </div>
         <div class="row pl-3 pr-3 mt-3 pb-5 col-auto">
             <div class="col-12">
-                <a href="#" class="btn btn-secondary" style="width:80%;">S'inscrire</a>
+                <button class="btn btn-secondary guest" style="width:80%;">Visiter sans compte</button>
             </div>
         </div> 
     </div>
 
 
+    <script>
+
+    function ajax(type,url,vars){
+        var hr = new XMLHttpRequest();
+				
+				//create some variables we need to send to our PHP file
+				
+				//var url = "profil.php";
+				
+				
+				//var vars = "email="+email+"&mdp="+mdp;
+               var return_data;
+						
+				hr.open(type,url,true);
+				//set content type header information for sending url encoded variables in the request 
+				
+				hr.setRequestHeader('content-type',"application/x-www-form-urlencoded");
+				
+				// Access the onreadyStateChange event for the XMLHttpRequest object
+				
+				hr.onreadystatechange = function(){
+					
+					if(hr.readyState == 4 && hr.status == 200){
+						
+						 return_data = hr.responseText;
+                         if(return_data == "sucess"){
+                             window.location.assign("Accueil.php");
+                         }else {
+                             $(".error_info").append('<h6 class="text-center alert-danger">wrong passwrod or email </h6>');
+                             setTimeout(function(){
+                                $(".error_info").children("h6").remove();
+                             }, 3000);
+                         }
+                         console.log(return_data);
+					
+					}
+				}
+				
+				// drnf the data to PHP now...  and wait for response to update the status div 	
+				hr.send(vars);
+				return return_data;
+
+    }
+    
+    $(".login").click(function(){
+
+            var email = $(".email").val();
+            var mdp = $(".mdp").val();
+            var vars = "email="+email+"&mdp="+mdp;
+            ajax("POST","conf.php",vars);
+    });
+
+    $(".guest").click(function(){
+    var vars = "guest=guest";
+    ajax("POST","conf.php",vars);
+    });
+
+
+
+
+
+    </script>
 
 
     <!-- Optional JavaScript -->
@@ -108,5 +163,6 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
 </body>
 </html>
