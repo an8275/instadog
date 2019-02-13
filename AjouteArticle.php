@@ -29,8 +29,8 @@ $obj = new Connexion();
           if(!isset($_SESSION["guest"])){
 
           echo "<div class='jumbotron '>";
-          echo "<h3 class='text-danger mt-3 text-center '>please log first</h3><br>";
-          echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-info btn-sm'>log in </a></h5>";
+          echo "<h3 class='text-danger mt-3 text-center '>Please log first</h3><br>";
+          echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-outline-info btn-sm'>log in </a></h5>";
           echo "</div>";
 
           die();
@@ -39,9 +39,9 @@ $obj = new Connexion();
 
   ?>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">
-          <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="Accueil.php">
+          <img src="images/logo.png" width="30" height="30" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -91,8 +91,8 @@ $obj = new Connexion();
                 
         </div>
         <div class="col-12 mt-3 pl-0 pr-0"> 
-            <input class="btn btn-primary col-5 btn-md mr-3 " type="button" value="Enregistrer">
-            <input class="btn btn-secondary col-6 btn-md" type="button" value="Annuler">
+            <input class="btn btn-outline-primary col-5 btn-md mr-3 " type="button" value="Enregistrer">
+            <input class="btn btn-outline-secondary col-6 btn-md" type="button" value="Annuler">
         </div> 
     </div>
 
@@ -113,7 +113,7 @@ $obj = new Connexion();
           var formdata = new FormData();
           formdata.append("img",img.files[0]);
           formdata.append("contenu",contenu);
-          formdata.append("chien_id",<?php echo $_GET["chien_id"]?>);
+          formdata.append("chien_id",<?php echo $_GET["id"]?>);
 
           
           //ajax.setRequestHeader('Content-type','application/x-www-form-urlencoded');
@@ -127,7 +127,7 @@ $obj = new Connexion();
 						setTimeout(() => {
               $(".message_area > .col-12 .text-success").replaceWith('<h3 class="text-center">Ajouter un Article</h3>');
             }, 3000);
-            window.location.assign("chien.php?chien_id="+<?php echo $_GET["chien_id"]?>);
+            window.location.assign("chien.php?id="+<?php echo $_GET["id"]?>);
 						
 						
 						}

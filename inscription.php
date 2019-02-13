@@ -13,7 +13,7 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <title>profil</title>
+    <title>Inst@Dog: Inscription</title>
 
     <style>
         .toggle.ios, .toggle-on.ios, .toggle-off.ios { 
@@ -29,9 +29,9 @@ session_start();
 
   
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -102,7 +102,7 @@ session_start();
         </div>
         <div class="row pl-3 pr-3 mt-3 pb-5 col-auto">
             <div class="col-12">
-                <button class="btn btn-secondary submit" style="width:80%;">S'inscrire</button>
+                <button class="btn btn-outline-primary submit" style="width:80%;">S'inscrire</button>
             </div>
         </div> 
     </div>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+require("Connexion.php");
+$obj = new Connexion();
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,8 +26,8 @@ session_start();
         if(!isset($_SESSION["guest"])){
 
         echo "<div class='jumbotron'>";
-        echo "<h3 class='text-danger mt-3 text-center'>please log first</h3><br>";
-        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-info btn-sm'>log in </a></h5>";
+        echo "<h3 class='text-danger mt-3 text-center'>Please log first</h3><br>";
+        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-outline-info btn-sm'>log in </a></h5>";
         echo "</div>";
 
         die();
@@ -33,9 +35,9 @@ session_start();
     }
 ?>     
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -70,260 +72,138 @@ session_start();
   
     <div class="container ">
            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/dog1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title alert-info">Article title 1</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="row">
-                                  <div class="col-9">
-                                      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          <i class="fa fa-comments"></i>
-                                      </a>
-                                  </div>
-                                  <div class="col-3">
-                                      <a class="btn btn-danger btn-sm">
-                                           <i class="fa fa-heart" style="color:white"></i>
-                                      </a>
-                                  </div>
-                                </div>
-                                <div class="comment_box collapse" id="collapseExample1" style=" margin-top: 21px;
-                                border-top: 1px solid rgb(224, 224, 224);padding-top:10px;">
-                                    
-                                        <div class="comment_list"  style="margin-top:10px;">
-                                          <ul class="list-unstyled">
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                  <h6 style="font-size:16px;"><strong class="zheader">jose</strong></h6>
-                                                  <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                              </li>
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                    <h6 style="font-size:16px;"><strong class="zheader">Vincent Bersey</strong></h6>
-                                                    <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                                </li>
-                                                <li class="media">
-                                                    <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                    <div class="media-body">
-                                                        <h6 style="font-size:16px;"><strong class="zheader">Rondens</strong></h6>
-                                                        <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                    
-                                                    </div>
-                                                </li>
-                                            </ul>
+
+                <?php
+                
+                  $articles = $obj->selectAllArticleChien($_GET["id"]);
+                  
+                  
+                  foreach($articles as $article){
+                    echo '<div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="card" style="width: 18rem;">
+                      <img src="'.$article->getImage().'" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title alert-info">Article title 1</h5>
+                          <p class="card-text">'.$article->getContenu().'</p>
+                          <div class="row">
+                            <div class="col-9">
+                                <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseExample1'; echo $article->getId();  echo '" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa fa-comments"></i>
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-danger btn-sm">
+                                     <i class="fa fa-heart" style="color:white"></i>
+                                </a>
+                            </div>
+                          </div>
+                          <div class="comment_box collapse" id="collapseExample1'; echo $article->getId(); echo'" style=" margin-top: 21px;
+                          border-top: 1px solid rgb(224, 224, 224);padding-top:10px;">
+                              
+                                  <div class="comment_list"  style="margin-top:10px;">
+                                    <ul class="list-unstyled">';
+                                    $comments = $obj->selectAllCommentaire($article->getId());
+
+                                      foreach($comments as $comment){
+                                        echo '<li class="media">
+                                        <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
+                                        <div class="media-body">
+                                            <h6 style="font-size:16px;"><strong class="zheader">'.$obj->selectUserById($comment->getUserId())->getPseudo().'</strong></h6>
+                                            <p style="font-size:12px;">'; echo  $comment->getContenu();echo '</p>
+                                        
                                         </div>
-                                        <div class="input-group input-group-sm">
-                                                <input  type="text" class="form-control info" placeholder="send your comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                                <div class="input-group-append">
-                                                <span class="input-group-text btn btn-outline-info btn-sm" id="basic-addon2">share</span>
-                                                </div>
-                                        </div>
+                                    </li>';
+                                      }                                
+                                          
+                                        
+                                    echo '</ul>
                                   </div>
-                              </div>
-                        </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/dog1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Article title 2</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="row">
-                                  <div class="col-9">
-                                      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          <i class="fa fa-comments"></i>
-                                      </a>
-                                  </div>
-                                  <div class="col-3">
-                                      <a class="btn btn-danger btn-sm">
-                                           <i class="fa fa-heart" style="color:white"></i>
-                                      </a>
-                                  </div>
-                                </div>
-                                <div class="comment_box collapse" id="collapseExample2" style=" margin-top: 21px;
-                                border-top: 1px solid rgb(224, 224, 224);padding-top:10px;">
-                                    
-                                      <div  style="margin-top:10px;">
-                                          <ul class="list-unstyled">
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                  <h6 style="font-size:16px;"><strong class="zheader">jose</strong></h6>
-                                                  <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                              </li>
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                    <h6 style="font-size:16px;"><strong class="zheader">Vincent Bersey</strong></h6>
-                                                    <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                                </li>
-                                                <li class="media">
-                                                    <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                    <div class="media-body">
-                                                        <h6 style="font-size:16px;"><strong class="zheader">Rondens</strong></h6>
-                                                        <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                    
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                      </div>
-                                      <div class="input-group input-group-sm">
-                                          <input  type="text" class="form-control info" placeholder="send your comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                  <div class="input-group input-group-sm">
+                                          <input  type="text" class="form-control info" placeholder="send your comment" aria-label="Recipient username" aria-describedby="'.$comment->getId().'">
                                           <div class="input-group-append">
-                                            <span class="input-group-text btn btn-outline-info btn-sm" id="basic-addon3">share</span>
+                                          <span class="input-group-text btn btn-outline-info btn-sm" id="'.$comment->getId().'" onclick="addcomment(this,'.$obj->selectUserAvecEmail($_SESSION["email"])->getId().','.$article->getId().')">share</span>
                                           </div>
-                                        </div>
                                   </div>
-                              </div>
+                            </div>
                         </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/dog1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Article title 3</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="row">
-                                  <div class="col-9">
-                                      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          <i class="fa fa-comments"></i>
-                                      </a>
-                                  </div>
-                                  <div class="col-3">
-                                      <a class="btn btn-danger btn-sm">
-                                           <i class="fa fa-heart" style="color:white"></i>
-                                      </a>
-                                  </div>
-                                </div>
-                                <div class="comment_box collapse" id="collapseExample3" style=" margin-top: 21px;
-                                border-top: 1px solid rgb(224, 224, 224);padding-top:10px;">
-                                    
-                                      <div  style="margin-top:10px;">
-                                          <ul class="list-unstyled">
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                  <h6 style="font-size:16px;"><strong class="zheader">jose</strong></h6>
-                                                  <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                              </li>
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                    <h6 style="font-size:16px;"><strong class="zheader">Vincent Bersey</strong></h6>
-                                                    <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                                </li>
-                                                <li class="media">
-                                                    <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                    <div class="media-body">
-                                                        <h6 style="font-size:16px;"><strong class="zheader">Rondens</strong></h6>
-                                                        <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                    
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                      </div>
-                                      <div class="input-group input-group-sm">
-                                          <input  type="text" class="form-control info" placeholder="send your comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                          <div class="input-group-append">
-                                            <span class="input-group-text btn btn-outline-info btn-sm" id="basic-addon3">share</span>
-                                          </div>
-                                        </div>
-                                  </div>
-                              </div>
-                        </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/dog1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Article title 4</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="row">
-                                  <div class="col-9">
-                                      <a class="btn btn-info btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                          <i class="fa fa-comments"></i>
-                                      </a>
-                                  </div>
-                                  <div class="col-3">
-                                      <a class="btn btn-danger btn-sm">
-                                           <i class="fa fa-heart" style="color:white"></i>
-                                      </a>
-                                  </div>
-                                </div>
-                                <div class="comment_box collapse" id="collapseExample4" style=" margin-top: 21px;
-                                border-top: 1px solid rgb(224, 224, 224);padding-top:10px;">
-                                    
-                                      <div  style="margin-top:10px;">
-                                          <ul class="list-unstyled">
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                  <h6 style="font-size:16px;"><strong class="zheader">jose</strong></h6>
-                                                  <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                              </li>
-                                              <li class="media">
-                                                <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                <div class="media-body">
-                                                    <h6 style="font-size:16px;"><strong class="zheader">Vincent Bersey</strong></h6>
-                                                    <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                
-                                                </div>
-                                                </li>
-                                                <li class="media">
-                                                    <img src="images/téléchargement.png" width="30px" class="mr-3" alt="...">
-                                                    <div class="media-body">
-                                                        <h6 style="font-size:16px;"><strong class="zheader">Rondens</strong></h6>
-                                                        <p style="font-size:12px;">Lorem ipsum dolor sit, amet consectetur fuga eum ha molestias nam.</p>
-                                                    
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                      </div>
-                                      <div class="input-group input-group-sm">
-                                          <input  type="text" class="form-control info" placeholder="send your comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                          <div class="input-group-append">
-                                            <span class="input-group-text btn btn-outline-info btn-sm" id="basic-addon4">share</span>
-                                          </div>
-                                        </div>
-                                  </div>
-                              </div>
-                        </div>
-                </div>
-           </div>
-    </div>
+                  </div>
+                  </div>
+                  ';
+
+                  }
+                  
+                
+                ?>        
+        </div>
+                
+  </div>
+                
 
     
       
     <script>
-    $(".btn-info").click(function(){
-        var h = $(this).parents(".card-body").children(".comment_box").height();
-        console.log(h);
-    });
-    $("#basic-addon2").click(function(event) {
 
-        var text = $(this).parents(".input-group").children(".form-control").val();
+
+    
+    function ajax(type,url,vars){
+        var hr = new XMLHttpRequest();
+				
+				//create some variables we need to send to our PHP file
+				
+				//var url = "profil.php";
+				
+				
+				//var vars = "email="+email+"&mdp="+mdp;
+        var return_data;
+						
+				hr.open(type,url,true);
+				//set content type header information for sending url encoded variables in the request 
+				
+				hr.setRequestHeader('content-type',"application/x-www-form-urlencoded");
+				
+				// Access the onreadyStateChange event for the XMLHttpRequest object
+				
+				hr.onreadystatechange = function(){
+					
+					if(hr.readyState == 4 && hr.status == 200){
+						
+						 if(hr.responseText = "sucess"){
+              var url = window.location.href;
+
+              setTimeout(() => {
+                window.location.assign(url);
+              }, 1000);
+             }
+                         
+                         
+					
+					}
+				}
+				
+				// drnf the data to PHP now...  and wait for response to update the status div 	
+				hr.send(vars);
+
+      
+    }
+
+    function addcomment(evt,user_id,article_id){
+      var text = $(evt).parents(".input-group").children(".form-control").val();
+
+        vars = "comment="+text+"&user_id="+user_id+"&article_id="+article_id;
+
+        ajax("POST","conf.php",vars)
+
         event.preventDefault();
-        $(this).parents('.comment_box').children(".comment_list").children("ul").append('<li class="media"><img src="images/téléchargement.png" width="30px" class="mr-3" alt="..."><div class="media-body"><h6 style="font-size:16px;"><strong class="zheader">Guest</strong></h6><p style="font-size:12px;">'+text+'</p></div></li>');
+        //ajax("POST","conf.php",)
+
+
+        //$(evt).parents('.comment_box').children(".comment_list").children("ul").append('<li class="media"><img src="images/téléchargement.png" width="30px" class="mr-3" alt="..."><div class="media-body"><h6 style="font-size:16px;"><strong class="zheader">'+user_name+'</strong></h6><p style="font-size:12px;">'+text+'</p></div></li>');
         
-        /* remove(); */
-    });
+    }
+
+
+   
+    
     
     </script>
     

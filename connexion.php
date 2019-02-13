@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     
-    <title>profil</title>
+    <title>Inst@Dog: Connexion</title>
   </head>
   <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,15 +80,15 @@
         </div>
         <div class="row pl-3 pr-3 col-auto">
             <div class="col-7">
-                <button class="btn btn-success login">se conneter</button>
+                <button class="btn btn-outline-success login">se conneter</button>
             </div>
             <div class="col-3 ml-3">
-                <a href="inscription.php" class="btn btn-primary ">s'inscrire</a>
+                <a href="inscription.php" class="btn btn-outline-primary">s'inscrire</a>
             </div>
         </div>
         <div class="row pl-3 pr-3 mt-3 pb-5 col-auto">
             <div class="col-12">
-                <button class="btn btn-secondary guest" style="width:80%;">Visiter sans compte</button>
+                <button class="btn btn-outline-secondary guest" style="width:80%;">Visiter sans compte</button>
             </div>
         </div> 
     </div>

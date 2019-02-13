@@ -14,7 +14,7 @@ $chien = $obj->selectChien($_GET["id"]);
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Hello, world!</title>
+    <title>Inst@Dog: Chien</title>
   </head>
   <body>
 
@@ -25,8 +25,8 @@ $chien = $obj->selectChien($_GET["id"]);
         if(!isset($_SESSION["guest"])){
 
         echo "<div class='jumbotron'>";
-        echo "<h3 class='text-danger mt-3 text-center'>please log first</h3><br>";
-        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-info btn-sm'>log in </a></h5>";
+        echo "<h3 class='text-danger mt-3 text-center'>Please log first</h3><br>";
+        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-outline-info btn-sm'>log in </a></h5>";
         echo "</div>";
 
         die();
@@ -34,9 +34,9 @@ $chien = $obj->selectChien($_GET["id"]);
     }
 ?>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -74,6 +74,7 @@ $chien = $obj->selectChien($_GET["id"]);
     <div class="row-fluid alert alert-secondary">
             <div class="media">
                 <img src="<?php echo $chien->getPhoto() ?>" class="mr-3 chienProfil" alt="...">
+                <a href="AjouteArticle.php?id=<?php echo $chien->getId() ?>" class="btn btn-outline-info mt-5 ml-5">+ Article</a>
                 <div class="media-body">
                     
                 </div>
@@ -121,7 +122,7 @@ $chien = $obj->selectChien($_GET["id"]);
                  <img src="'.$article->getImage().'" class="card-img-top" alt="...">
                  <div class="card-body">
                    <p class="card-text">'.$article->getContenu().'</p>
-                   <a href="Article.php?'.$_GET["chien_id"].'" class="btn btn-info">Go somewhere</a>
+                   <a href="Article.php?id='.$_GET["id"].'" class="btn btn-outline-info">Go somewhere</a>
                  </div>
              </div>  
             </div>';

@@ -8,7 +8,7 @@ class Connexion {
 			"db_host" => "localhost",
 			"db_port" => "3306",
 			"db_user" => "adminInstaDog",
-			"db_pass" => "digital2018",
+			"db_pass" => "Inst@D0g",
 			"db_name" => "InstaDog");
 		try{
 			$this->connexion = new PDO("mysql:host=".$db_info['db_host'].';port='.$db_info['db_port'].';dbname='.$db_info['db_name'], $db_info['db_user'], $db_info['db_pass']);
@@ -30,6 +30,15 @@ class Connexion {
 		$requete_prepare = $this->connexion->prepare(
 		"select * from user where email = :email and motDePass = :mdp");
 		$requete_prepare->execute(array("email"=>$email, "mdp"=>$mdp));
+		$result = $requete_prepare->fetchObject("User");
+		return $result;   
+	}
+
+
+	function selectUserById($id){
+		$requete_prepare = $this->connexion->prepare(
+		"select * from user where id = :id");
+		$requete_prepare->execute(array("id"=>$id));
 		$result = $requete_prepare->fetchObject("User");
 		return $result;   
 	}
@@ -128,7 +137,7 @@ class Connexion {
 	//pour afficher les commentaire d'articles 
 	public function selectAllCommentaire($id){
 		$requete_prepare = $this->connexion->prepare(
-			"select * from Commentaire where article_id = :id");
+			"select * from commentaire where article_id = :id");
 		$requete_prepare->execute(array("id"=>$id));
 		$result = $requete_prepare->fetchAll(PDO::FETCH_CLASS,"Commentaire");
 		return $result;
@@ -138,7 +147,7 @@ class Connexion {
 	//pour inserer une commentaire
 	public function insertCommentaire($contenu,$userId,$article_id){
 		$requete_prepare = $this->connexion->prepare(
-			"insert into Commentaire (contenu,user_id,article_id) values (:contenu, :user_id, :article_id)"
+			"insert into commentaire (contenu,user_id,article_id) values (:contenu, :user_id, :article_id)"
 		);
 		$requete_prepare->execute(array("contenu"=>$contenu, "user_id"=>$userId, "article_id"=>$article_id));
 		return $this->connexion->lastInsertId();
@@ -166,6 +175,10 @@ class Article {
     private $dateArticle;
     private $chienId;
 
+
+	public function getId(){
+        return $this->id;
+    }
 
     public function getImage(){
         return $this->img;
@@ -267,14 +280,16 @@ class Commentaire {
 
 	//les varible sont privées on ne peut pas avoir access directement
 	private $id;
-	private $contunu;
+	private $contenu;
 	private $date;
 	private $user_id;
 	private $article_id;
 
-
+	public function getId(){
+		return $this->id;
+	}
 	public function getContenu(){
-		return $this->contunu;
+		return $this->contenu;
 	}
 	
 	public function getDate(){

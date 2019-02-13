@@ -153,7 +153,9 @@ if(isset($_FILES["img"]) && isset($_POST["contenu"])){
           //echo "$fileName upload is complete";
            if($obj->insertChien($nom_de_chien,$surnom_de_chien,$sex,$age,$race_de_chien,$path,$user_id)){
 
-                echo "sucess";
+                //echo "sucess";
+                echo $obj->getConnexion()->lastInsertId();
+
            }
 
   
@@ -162,6 +164,22 @@ if(isset($_FILES["img"]) && isset($_POST["contenu"])){
           echo "move_uploaded_file function fialed";
       } 
 
+    
+  }
+
+
+  // la partie ajoute commentaires
+
+
+  if(isset($_POST["comment"]) && isset($_POST["user_id"]) && isset($_POST["article_id"])){
+
+    $comment    = $_POST["comment"];
+    $user_id    = $_POST["user_id"];
+    $article_id = $_POST["article_id"];
+
+    if($obj->insertCommentaire($comment,$user_id,$article_id)){
+      echo "sucess";
+    }
     
   }
 

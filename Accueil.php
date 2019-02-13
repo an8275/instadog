@@ -27,9 +27,9 @@ $obj = new Connexion();
         if(!isset($_SESSION["guest"])){
 
         echo "<div class='jumbotron'>";
-        echo "<h3 class='text-danger mt-3 text-center'>please log first</h3><br>";
-        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-info btn-sm'>log in </a></h5>";
-        echo '<h5 class= "text-center"><a href="conf.php?guest=guest" class="btn btn-secondary guest" style="width:80%;">Visiter sans compte</a><h5>';
+        echo "<h3 class='text-danger mt-3 text-center'>Please log first</h3><br>";
+        echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-outline-info btn-sm'>log in </a></h5>";
+        echo '<h5 class= "text-center"><a href="conf.php?guest=guest" class="btn btn-outline-secondary guest" style="width:80%;">Visiter sans compte</a><h5>';
         echo "</div>";
 
         die();
@@ -37,9 +37,9 @@ $obj = new Connexion();
     }
 ?>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -89,7 +89,7 @@ $obj = new Connexion();
 
             echo ' <div class="col-sm-12 col-md-6 col-lg-3">
                     <div class="card" style="width: 18rem;">
-                        <a href="chien.php?id='.$chien->getId().'"><img src="'.$chien->getPhoto().'" class="card-img-top img-thumbnail" alt="..."></a>
+                        <a href="chien.php?id='.$chien->getId().'"><img src="'.$chien->getPhoto().'" class=" card-img-top img-thumbnail" alt="..."></a>
                     </div>  
                   </div>';
         }

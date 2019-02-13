@@ -19,7 +19,7 @@ $user_chien  = $obj->selectAllChienId($user_details->getId());
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <title>profil</title>
+    <title>Inst@Dog: Profil</title>
   </head>
   <body>
 
@@ -29,8 +29,8 @@ $user_chien  = $obj->selectAllChienId($user_details->getId());
     if(!isset($_SESSION["guest"])){
 
     echo "<div class='jumbotron'>";
-    echo "<h3 class='text-danger mt-3 text-center'>please log first</h3><br>";
-    echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-info btn-sm'>log in </a></h5>";
+    echo "<h3 class='text-danger mt-3 text-center'>Please log first</h3><br>";
+    echo "<h5 class='text-center'><a  href='connexion.php' class=' btn btn-outline-info btn-sm'>log in </a></h5>";
     echo "</div>";
 
     die();
@@ -38,16 +38,16 @@ $user_chien  = $obj->selectAllChienId($user_details->getId());
 }
 ?>
     
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <img src="images/logo.svg" width="30" height="30" alt="">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Accueil.php">
+            <img src="images/logo.png" width="30" height="30" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="Accueil.php">Accueil <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
@@ -75,7 +75,7 @@ $user_chien  = $obj->selectAllChienId($user_details->getId());
     <div class="container alert-secondary pt-3">
         <div class="row mt-3 text-center">
             <div class="col-12 error_info">
-                <h4>Profil de la personne</h4>
+                <h4>Profil</h4>
             </div>
         </div>
         <?php
@@ -122,7 +122,7 @@ $user_chien  = $obj->selectAllChienId($user_details->getId());
                     echo '<div class="col-6">
                         <h6>'.$chien->getSurnom().'</h6>
                         <a href="chien.php?id='.$chien->getId().'"><img src="'.$chien->getPhoto().'" alt="..." class="img-thumbnail"></a>
-                        <a href="AjouteArticle.php?id='.$chien->getId().'" class="btn btn-sm btn-primary mt-1">+ Article</a>
+                        <a href="AjouteArticle.php?id='.$chien->getId().'" class="btn btn-outline-info mt-1">+ Article</a>
                       </div>';
                 }
             ?>

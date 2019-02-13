@@ -1,9 +1,14 @@
 <?php
-/* include("Connexion.php");
+ include("Connexion.php");
 $obj = new Connexion();
-$con = $obj->getConnexion(); 
 
-echo "<pre>";
+$comments = $obj->selectAllCommentaire(22);
+
+var_dump($comments[0]->getContenu());
+/* foreach($comments as $comment){
+    echo $comment->getContenu();
+} */
+/* echo "<pre>";
 
 echo "ok";
 echo date("Y-m-d H:i:s");
@@ -12,14 +17,13 @@ echo $obj->insertArticle("test.png","the best dog i ever had",date("Y-m-d H:i:s"
 
 echo "</pre>"; 
 
-    
-    */   
+    */ 
     
     
     
 // The message
 
-$headers  = "Organization: www.realise.ch\r\n";
+/* $headers  = "Organization: www.realise.ch\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
 $headers .= "X-Priority: 3\r\n";
@@ -28,7 +32,7 @@ if(mail("zabiullah.ahmadi.241994@gmail.com", "Message", "A simple message.", $he
     echo "send";
 }else {
     echo "failed";
-}
+} */
     
 ?>
 
